@@ -18,5 +18,7 @@ public class PlayerController : MonoBehaviour
         // Move player right or left key arrow pressed.
 
         // Make boundaries for the player area.
+        
+        // spawn random objects.
     }
 }
