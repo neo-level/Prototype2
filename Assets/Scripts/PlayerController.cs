@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
     public float horizontalInput;
     public float speed = 10.0f;
     public float xRange = 10.0f;
-
+    public GameObject projectilePrefab;
+    
     // Start is called before the first frame update
     private void Start()
     {
@@ -36,6 +37,13 @@ public class PlayerController : MonoBehaviour
         // Move player right or left key arrow pressed.
         transform.Translate(Vector3.right * (horizontalInput * Time.deltaTime * speed));
 
+        // Instantiate object on space bar press.
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // Launch a projectile from the player.
+            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+            
+        }
 
         // spawn random objects.
     }
