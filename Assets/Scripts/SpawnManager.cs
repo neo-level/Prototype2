@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    // Array of game objects, containing the selected animals.
     public GameObject[] animalPrefabs;
-
+    
+    // Set the spawn boundaries and position for the animals.
     private float spawnRangeX = 20.0f;
     private float spawnPositionZ = 20.0f;
+    
+    // Set the time when animals will start to spawn and on which interval.
     private float startDelay = 2.0f;
     private float spawnInterval = 1.5f;
 
