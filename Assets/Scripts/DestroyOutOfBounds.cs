@@ -18,7 +18,7 @@ public class DestroyOutOfBounds : MonoBehaviour
     void Update()
     {
         
-        // Check if the object crosses the boundary.
+        // Check if the object crosses the boundary. => The view field of the player.
         if (transform.position.z > topBoundary)
         {
             // Destroy object if the object passes the top boundary.
@@ -26,6 +26,8 @@ public class DestroyOutOfBounds : MonoBehaviour
 
         } else if (transform.position.z < lowerBoundary)
         {
+            // Add logging to show when the game is over.
+            Debug.Log("Game Over");
             // Destroy object if the object passes the down boundary.
             Destroy(gameObject);
 
