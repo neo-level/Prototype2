@@ -25,11 +25,7 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            // Call method to generate an animal on a random location.
-            SpawnRandomAnimal();
-        }
+
     }
 
     private void SpawnRandomAnimal()
