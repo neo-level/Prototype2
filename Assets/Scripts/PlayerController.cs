@@ -17,16 +17,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+         
         // Check if player reaches the range treshold.
         if (transform.position.x < -xRange)
         {
             // Make a left boundary for the player area.
-            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+            SetBoundary(-xRange);
         }
         else if (transform.position.x > xRange)
         {
             // Make a right boundary for the player area.
-            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+            SetBoundary(xRange);
         }
 
         // Get the input type for horizontal movement.
@@ -37,5 +38,10 @@ public class PlayerController : MonoBehaviour
 
 
         // spawn random objects.
+    }
+    
+    private void SetBoundary(float threshold)
+    {
+        transform.position = new Vector3(x: threshold, y: transform.position.y, z: transform.position.z);
     }
 }
