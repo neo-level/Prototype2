@@ -4,52 +4,46 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Add fields for to handle game object and player control.
-    public float horizontalInput;
-    public float speed = 10.0f;
-    public float xRange = 10.0f;
+    private float horizontalInput;
+    private float speed = 20.0f;
+    private float xRange = 20;
     public GameObject projectilePrefab;
-    
-    // Start is called before the first frame update
-    private void Start()
-    {
-    }
+
 
     // Update is called once per frame
-    private void Update()
+    void Update()
     {
-         
-        // Check if player reaches the range treshold.
+        // Check for left and right bounds
         if (transform.position.x < -xRange)
         {
-            // Make a left boundary for the player area.
-            SetBoundary(-xRange);
+            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
         }
-        else if (transform.position.x > xRange)
+
+        if (transform.position.x > xRange)
         {
-            // Make a right boundary for the player area.
-            SetBoundary(xRange);
+            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
         }
 
-        // Get the input type for horizontal movement.
+        // Player movement left to right
         horizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
 
-        // Move player right or left key arrow pressed.
-        transform.Translate(Vector3.right * (horizontalInput * Time.deltaTime * speed));
 
-        // Instantiate object on space bar press.
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // Launch a projectile from the player.
-            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
-            
+            // No longer necessary to Instantiate prefabs
+            // Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+
+            // Get an object object from the pool
+            GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
+            if (pooledProjectile != null)
+            {
+                pooledProjectile.SetActive(true); // activate it
+                pooledProjectile.transform.position = transform.position; // position it at player
+            }
         }
 
-        // spawn random objects.
-    }
-    
-    private void SetBoundary(float threshold)
-    {
-        transform.position = new Vector3(x: threshold, y: transform.position.y, z: transform.position.z);
+
+
     }
 }
